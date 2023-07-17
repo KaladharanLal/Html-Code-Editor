@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Html Code Editor</title>
+    <style>
+        body
+        {
+            background-color: rgb(49, 49, 49);
+            color: gray;
+        }
+        textarea
+        {
+            background-color: rgb(51, 51, 51);
+            color: gray;
+            height: 200px;
+            width: 400px;
+            font-family: Arial, Helvetica, sans-serif;
+            border-radius: 10px;
+        }
+        iframe
+        {
+            background-color: white;
+            height: 200px;
+            width: 400px;
+        }
+        h3
+        {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 20px;
+            font-weight: 100;
+            padding-top: 30px;
+        }
+        h1
+        {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 30px;
+            font-weight: 100;
+        }
+        button
+        {
+            background-color: grey;
+            color: rgb(51, 51, 51);
+            border-radius: 20px;
+            font-size: medium;
+        }
+    </style>
+</head>
+<body>
+    <h1>HTML CODE WRITTER</h1>
+    <div class="editor">
+        <h3>html-body</h3>
+        <div>
+        <textarea id="html-code", rows="10"></textarea>
+        <button onclick="resize('html-code',0,'r')">-</button>
+        <button>+</button>
+        </div>
+        <button>+</button>
+        <button>-</button>
+
+        <h3>css</h3>
+        <textarea id="css-code", rows="10"></textarea>
+
+        <h3>javascript</h3>
+        <textarea id="js-code", rows="10"></textarea>
+
+        <h3>Output</h3>
+        <div><button onclick="run()">Run / Refresh</button></div>
+        <iframe id="output", rows="10"></iframe>
+    </div>
+
+    <script type="text/javascript">
+
+        function run()
+        {
+            let htmlCode = document.querySelector(".editor #html-code").value;
+            let cssCode = "<style>" + document.querySelector(".editor #css-code").value + "</style>";
+            let jsCode = document.querySelector(".editor #js-code").value;
+            let output = document.querySelector(".editor #output");
+            //console.log(htmlCode,cssCode,jsCode,output);
+            output.contentDocument.body.innerHTML = htmlCode;
+            output.contentDocument.head.innerHTML = cssCode;
+            output.contentWindow.eval(jsCode);
+        }
+
+        function resize(id, posOrNeg, rORd)
+        {
+            console.log("resize ",document.getElementById(id).clientWidth);
+            //document.getElementById(id).style = document.getElementById(id).clientWidth - 5;
+        }
+    </script>
+
+</body>
+</html>
